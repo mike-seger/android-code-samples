@@ -1,0 +1,44 @@
+google youtube api key: AIzaSyBCC3YcuzjpkfimATeWsLZXrkNIRtQwA6c
+
+
+
+/Users/peng/.android
+
+Pengs-MacBook-Pro:.android peng$ keytool -list -v -keystore debug.keystore
+Enter keystore password:  
+
+Keystore type: JKS
+Keystore provider: SUN
+
+Your keystore contains 1 entry
+
+Alias name: androiddebugkey
+Creation date: Sep 3, 2015
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: CN=Android Debug, O=Android, C=US
+Issuer: CN=Android Debug, O=Android, C=US
+Serial number: 46c5d971
+Valid from: Thu Sep 03 22:48:27 EDT 2015 until: Sat Aug 26 22:48:27 EDT 2045
+Certificate fingerprints:
+	 MD5:  0E:42:5A:C3:95:0D:7F:A2:6C:07:4B:ED:4A:BE:26:A3
+	 SHA1: 3D:3F:29:5B:DC:2C:E9:42:92:38:B3:0A:A1:17:D3:60:06:F1:E7:4F
+	 SHA256: F2:56:DA:40:9A:C2:E5:5E:23:AE:D6:95:1E:79:58:FB:E0:77:96:1B:3C:55:42:1C:06:4F:90:FA:13:82:12:46
+	 Signature algorithm name: SHA256withRSA
+	 Version: 3
+
+Extensions: 
+
+#1: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: DE B9 E7 6D 91 5E 62 0E   0F 2D 89 67 EB 01 86 58  ...m.^b..-.g...X
+0010: 2E 1B BD 55                                        ...U
+]
+]
+
+
+
+*******************************************
+*******************************************

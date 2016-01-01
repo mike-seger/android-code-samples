@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Config Change</string>
+    <string name="counter_note">The number at the top represents the number of restarts of the activity. The activity is restarted when you rotate the screen orentation, press the back button or any other actions to navigate away from the activity.</string>
+    <string name="text_view_with_id_note">Text entered in the first EditText will be preserved on screen oretnation changes because it has an id, the id is used to identify this EditText when the onSaveInstanceState method is doing its job.</string>
+    <string name="text_view_without_id_note">Text entered in the second EditText won\'t be preserved on screen orientation change because it doesn\'t have an id assigned to it. </string>
+</resources>

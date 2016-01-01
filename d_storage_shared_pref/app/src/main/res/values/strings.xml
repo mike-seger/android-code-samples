@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="welcome">www.101apps.co.za for <b>Android eBooks and Tutorials - </b>ideal for beginners</string>
+    <string name="app_name">Shared Preferences Tutorial</string>
+    <string name="next_activity_label">Go to next activity</string>
+    <string name="return_label">Go Back</string>
+    <string name="user_label">Select a user name</string>
+    <string name="clear_app_prefs_label">Clear Application Shared Preferences</string>
+    <string name="reset_counter">Reset counter</string>
+
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">the appexperts.co.uk for Android made easy  - ideal for beginners!</string>
+    <string name="app_name">Internal Storage Tutorial</string>
+    <string name="read_button_label">Press to read file</string>
+    <string name="write_button_label">Press to write file</string>
+    <string name="delete_button_label">Press to delete file</string>
+
+</resources>

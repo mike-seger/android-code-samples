@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Share via Media" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Open Contacts" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Open Gallery" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Launch Website" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Dialer App" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Trnasfer Data" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Caller Screen" />
+
+</LinearLayout>

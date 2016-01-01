@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">www.101apps.co.za for Android ebooks and tutorials</string>
+    <string name="app_name">External Storage (public) Tutorial</string>
+    <string name="display_image">Press to display saved image</string>
+    <string name="delete_picture">Press to delete saved picture</string>
+    <string name="save_picture">Press to save picture to external storage</string>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">SpinnerEx</string>
+    <string name="Choose_Technology">Select Technology</string>
+<string-array name="technology_array">
+    <item>Java</item>
+    <item>J2EE</item>
+    <item>Struts</item>
+    <item>Spring</item>
+    <item>Hibernate</item>
+    <item>EJB</item>
+    <item>JPA</item>
+    <item>WebServices</item>
+    <item>JSF</item>
+</string-array>
+</resources>

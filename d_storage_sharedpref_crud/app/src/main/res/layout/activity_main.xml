@@ -1,0 +1,81 @@
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="30dp"
+            android:text="Enter Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/pref_editText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="20dp"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/pref_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="28dp"
+            android:layout_toRightOf="@+id/textView1"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/show_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pref_editText"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="28dp"
+            android:layout_toRightOf="@+id/save_button"
+            android:text="Show" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/show_button"
+            android:layout_alignBottom="@+id/show_button"
+            android:layout_alignLeft="@+id/pref_editText"
+            android:text="Save" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/save_button"
+            android:layout_below="@+id/show_button"
+            android:layout_marginTop="105dp"
+            android:text="Preference Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView2"
+            android:layout_marginLeft="18dp"
+            android:layout_toRightOf="@+id/textView2"
+            android:text="Delete" />
+
+        <Button
+            android:id="@+id/clear_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/show_button"
+            android:layout_centerVertical="true"
+            android:text="Clear All" />
+
+    </RelativeLayout>
