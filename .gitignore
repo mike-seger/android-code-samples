@@ -1,0 +1,7 @@
+#ignore build folder
+build
+
+#ignore mac folder attribute file
+.DS_Store
+
+
