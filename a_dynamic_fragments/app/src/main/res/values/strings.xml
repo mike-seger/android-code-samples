@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">DynamicFragments</string>
+    <string name="str_btn_load">Load Fragment</string>
+    <string name="str_tv_fragment">This is a fragment</string>
+
+</resources>
