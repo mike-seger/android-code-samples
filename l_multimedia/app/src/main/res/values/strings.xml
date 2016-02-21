@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Multimedia</string>
+    <string name="video_view">Multimedia A/V</string>
+    <string name="action_exit">Exit</string>
+    <string name="vvActivity">VideoView Example</string>
+    <string name="mediaPlayerActivity">Media Player Example</string>
+    <string name="urlVideo">https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4</string>
+    <string name="playVideo">Play</string>
+    <string name="title_activity_media_player">Video View Activity</string>
+    <string name="initial_time">0 min, 0 sec</string>
+    <string name="now_playing">"Now Playing: "</string>
+    <string name="title_activity_fake_player">FakePlayer</string>
+    <string name="local_video">Local Video</string>
+    <string name="stream_video">Stream Video</string>
+    <string name="local_audio">Local Audio</string>
+    <string name="res_audio">Resource Android</string>
+    <string name="audio_media_player">Audio Media Player</string>
+</resources>
