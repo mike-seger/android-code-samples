@@ -68,7 +68,6 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     private void deletePreferences(String key) {
-
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(key);
