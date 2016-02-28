@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "info.androidhive.actionbar"
-        minSdkVersion 11
+        minSdkVersion 18
         targetSdkVersion 18
     }
 
