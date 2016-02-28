@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.codexpedia.toolbardemo.MainActivity">
+    <item
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_content"
+        android:orderInCategory="100"
+        android:title="Content"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_detail"
+        android:orderInCategory="100"
+        android:title="Detail"
+        app:showAsAction="never" />
+</menu>
