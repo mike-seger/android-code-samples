@@ -6,7 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,7 +29,9 @@ public class ViewPagerCarouselView extends RelativeLayout {
     private int [] imageResourceIds;                        // Carousel view background image
     private long carouselSlideInterval;                     // Carousel view item sliding interval
     private Handler carouselHandler;                        // Carousel view item sliding interval automation handler
-
+    private int lastPageIndex;
+    private int mCurrentPosition = 0;
+    private int mScrollState;
     public ViewPagerCarouselView (Context context) {
         super(context);
         initView(context);
@@ -64,6 +69,7 @@ public class ViewPagerCarouselView extends RelativeLayout {
         this.fragmentManager = fragmentManager;
         this.imageResourceIds = imageResourceIds;
         this.carouselSlideInterval = carouselSlideInterval;
+        this.lastPageIndex = imageResourceIds.length - 1;
         initData();
         initCarousel();
         initCarouselSlide();
@@ -78,6 +84,7 @@ public class ViewPagerCarouselView extends RelativeLayout {
             ImageView obj = new ImageView(getContext());
             obj.setImageResource(R.drawable.selector_carousel_page_indicator);
             obj.setPadding(0, 0, 5, 0); // left, top, right, bottom
+            if (i==0 || i==imageResourceIds.length-1) obj.setVisibility(View.INVISIBLE);
             llPageIndicatorContainer.addView(obj);
             carouselPageIndicators.add(obj);
         }
@@ -87,33 +94,36 @@ public class ViewPagerCarouselView extends RelativeLayout {
      * Initialize carousel views, each item in the carousel view is a fragment
      */
     private void initCarousel() {
-        carouselPageIndicators.get(0).setSelected(true);
+        carouselPageIndicators.get(1).setSelected(true);
 
         // Update the carousel page indicator on change
         vpCarousel.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                for (int i = 0; i < carouselPageIndicators.size(); i++) {
-                    if (i == position)
-                        carouselPageIndicators.get(position).setSelected(true);
-                    else
-                        carouselPageIndicators.get(i).setSelected(false);
+                if (carouselHandler != null) {
+                    // reset the slider when the ViewPager is scrolled manually to prevent the quick slide after it is scrolled.
+                    carouselHandler.removeCallbacksAndMessages(null);
+                    initCarouselSlide();
                 }
             }
 
             @Override
+            public void onPageSelected(int position) {
+                mCurrentPosition = position;
+                updateSlideIndicator(position);
+            }
+
+            @Override
             public void onPageScrollStateChanged(int state) {
+                if (mCurrentPosition == 0)                  vpCarousel.setCurrentItem(lastPageIndex - 1, false);
+                if (mCurrentPosition == lastPageIndex)      vpCarousel.setCurrentItem(1, false);
             }
         });
 
         ViewPagerCarouselAdapter viewPagerCarouselAdapter = new ViewPagerCarouselAdapter(fragmentManager, imageResourceIds);
-        vpCarousel.setPageTransformer(false, new CustomViewPageTransformer(CustomViewPageTransformer.TransformType.SLIDE_OVER));
+//        vpCarousel.setPageTransformer(false, new CustomViewPageTransformer(CustomViewPageTransformer.TransformType.SLIDE_OVER));
         vpCarousel.setAdapter(viewPagerCarouselAdapter);
+        vpCarousel.setCurrentItem(1);
 
     }
 
@@ -123,7 +133,7 @@ public class ViewPagerCarouselView extends RelativeLayout {
     private void initCarouselSlide() {
         final int nCount = imageResourceIds.length;
         try {
-            carouselHandler = new Handler();
+            if (carouselHandler == null) carouselHandler = new Handler();
             carouselHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -140,7 +150,17 @@ public class ViewPagerCarouselView extends RelativeLayout {
         }
     }
 
+    private void updateSlideIndicator(int position) {
+        for (int i = 0; i < carouselPageIndicators.size(); i++) {
+            if (i == position) carouselPageIndicators.get(position).setSelected(true);
+            else carouselPageIndicators.get(i).setSelected(false);
+        }
+    }
+
     public void onDestroy() {
         if (carouselHandler != null) carouselHandler.removeCallbacksAndMessages(null); // remove call backs to prevent memory leaks
     }
+
+
+
 }
