@@ -3,12 +3,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@drawable/newyork"
-        />
+        android:background="@drawable/newyork">
+        <TextView
+            android:id="@+id/tv_city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:textColor="#fff"
+            android:textSize="28sp"
+            android:text="New York"/>
+    </android.support.v7.widget.Toolbar>
+
     <TextView
         android:id="@+id/tv_city_desc"
         android:layout_width="match_parent"

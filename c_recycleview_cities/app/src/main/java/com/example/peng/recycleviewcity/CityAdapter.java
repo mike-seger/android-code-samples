@@ -23,6 +23,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder>{
     private List<City> cities;
     private int rowLayout;
     private Context mContext;
+    private ItemClickListener clickListener;
 
     public CityAdapter(List<City> cities, int rowLayout, Context context) {
         this.cities = cities;
@@ -31,29 +32,16 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder>{
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(rowLayout, viewGroup, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        final City city = cities.get(i);
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        final City city = cities.get(position);
         viewHolder.cityName.setText(city.name);
         viewHolder.cityImage.setImageDrawable(mContext.getResources().getDrawable(city.getImageResourceId(mContext)));
-        // viewHolder.versionName=viewHolder.cityName.getText().toString();
-        viewHolder.setClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(View view, int position, boolean isLongClick) {
-                Intent i = new Intent(mContext, CityviewActivity.class);
-                i.putExtra("city", city.name);
-                i.putExtra("desc", city.description);
-                i.putExtra("image", city.imageName);
-                Log.i("hello", city.name);
-                mContext.startActivity(i);
-            }
-        });
-
     }
 
     @Override
@@ -61,33 +49,24 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder>{
         return cities == null ? 0 : cities.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView cityName;
         public ImageView cityImage;
-        public String versionName;
-        private ItemClickListener clickListener;
         public ViewHolder(View itemView) {
             super(itemView);
             cityName = (TextView) itemView.findViewById(R.id.city_name);
             cityImage = (ImageView)itemView.findViewById(R.id.city_image);
             itemView.setTag(itemView);
             itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
-        }
-        public void setClickListener(ItemClickListener itemClickListener) {
-            this.clickListener = itemClickListener;
         }
 
         @Override
         public void onClick(View view) {
-            clickListener.onClick(view, getPosition(), false);
+           if (clickListener != null) clickListener.onClick(view, getAdapterPosition());
         }
-
-        @Override
-        public boolean onLongClick(View view) {
-            clickListener.onClick(view, getPosition(), true);
-            return true;
-        }
-
     }
 }

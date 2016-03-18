@@ -2,11 +2,13 @@ package com.codexpedia;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+
 import info.androidhive.actionbar.R;
 
 public class MainActivity extends Activity {
@@ -20,12 +22,18 @@ public class MainActivity extends Activity {
 		tvAction = (TextView) findViewById(R.id.tv_action);
 
 		actionBar = getActionBar();
-		actionBar.setDisplayShowTitleEnabled(false); // Hide the action bar title
+//		actionBar.setDisplayShowTitleEnabled(false); 					// Hide the action bar title
+//		actionBar.setDisplayHomeAsUpEnabled(true);
+//		actionBar.setHomeAsUpIndicator(R.drawable.actionbar_upbutton);
+//		actionBar.setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+
+
+		actionBar.setDisplayShowTitleEnabled(false);
+//		actionBar.setCustomView(mView);
+		actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.blue));
+		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
-//		actionBar.setHomeAsUpIndicator(R.drawable.ic_action_list);
-
-		actionBar.setIcon(R.drawable.ic_action_list);
-
+		actionBar.setHomeAsUpIndicator(R.drawable.actionbar_upbutton);
 	}
 
 	@Override
