@@ -10,13 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends Activity {
-
     // UI elements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.i(this.getLocalClassName(),"Activity created.");
+        String greeting = (savedInstanceState != null) ? savedInstanceState.getString("greeting") : "null";
+        Log.i(this.getLocalClassName(),"Activity created. greeting from onSaveInstanceState: " + greeting);
     }
 
 
@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putString("greeting", "Hello"); outState.putParcelable("parcelable", null);
         Log.i(this.getLocalClassName(), "Save instance.");
-
     }
 }

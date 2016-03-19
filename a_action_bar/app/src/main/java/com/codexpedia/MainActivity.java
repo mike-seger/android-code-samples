@@ -22,10 +22,7 @@ public class MainActivity extends Activity {
 		actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false); // Hide the action bar title
 		actionBar.setDisplayHomeAsUpEnabled(true);
-//		actionBar.setHomeAsUpIndicator(R.drawable.ic_action_list);
-
-		actionBar.setIcon(R.drawable.ic_action_list);
-
+		actionBar.setHomeAsUpIndicator(R.drawable.ic_action_list);
 	}
 
 	@Override
