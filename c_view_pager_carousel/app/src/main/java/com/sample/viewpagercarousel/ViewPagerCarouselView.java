@@ -101,8 +101,7 @@ public class ViewPagerCarouselView extends RelativeLayout {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (carouselHandler != null) {
-                    // reset the slider when the ViewPager is scrolled manually to prevent the quick slide after it is scrolled.
-                    carouselHandler.removeCallbacksAndMessages(null);
+                    carouselHandler.removeCallbacksAndMessages(null); // reset the slider when the ViewPager is scrolled manually to prevent the quick slide after it is scrolled.
                     initCarouselSlide();
                 }
             }
@@ -115,13 +114,15 @@ public class ViewPagerCarouselView extends RelativeLayout {
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                // For going from the first item to the last item, Set the current item to the item before the last item if the current position is 0
                 if (mCurrentPosition == 0)                  vpCarousel.setCurrentItem(lastPageIndex - 1, false);
+
+                // For going from the last item to the first item, Set the current item to the second item if the current position is on the last
                 if (mCurrentPosition == lastPageIndex)      vpCarousel.setCurrentItem(1, false);
             }
         });
 
         ViewPagerCarouselAdapter viewPagerCarouselAdapter = new ViewPagerCarouselAdapter(fragmentManager, imageResourceIds);
-//        vpCarousel.setPageTransformer(false, new CustomViewPageTransformer(CustomViewPageTransformer.TransformType.SLIDE_OVER));
         vpCarousel.setAdapter(viewPagerCarouselAdapter);
         vpCarousel.setCurrentItem(1);
 

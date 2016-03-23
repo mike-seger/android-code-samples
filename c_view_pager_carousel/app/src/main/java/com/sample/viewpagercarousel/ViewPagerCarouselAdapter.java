@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
  * Created by pye on 2/24/16.
+ * This adapter gets the individual fragment into the carousel view
  */
 public class ViewPagerCarouselAdapter extends FragmentStatePagerAdapter {
     private int[] imageResourceIds;

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 /**
  * Created by pye on 2/24/16.
+ * This ViewPagerCarouselFragment provides the individual item view in the carousel view.
  */
 public class ViewPagerCarouselFragment extends Fragment {
     public static final String IMAGE_RESOURCE_ID = "image_resource_id";
