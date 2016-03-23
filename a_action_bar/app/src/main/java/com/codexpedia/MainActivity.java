@@ -22,18 +22,10 @@ public class MainActivity extends Activity {
 		tvAction = (TextView) findViewById(R.id.tv_action);
 
 		actionBar = getActionBar();
-//		actionBar.setDisplayShowTitleEnabled(false); 					// Hide the action bar title
-//		actionBar.setDisplayHomeAsUpEnabled(true);
-//		actionBar.setHomeAsUpIndicator(R.drawable.actionbar_upbutton);
-//		actionBar.setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
-
-
-		actionBar.setDisplayShowTitleEnabled(false);
-//		actionBar.setCustomView(mView);
-		actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.blue));
-		actionBar.setDisplayShowCustomEnabled(true);
+		actionBar.setDisplayShowTitleEnabled(false); // Hide the action bar title
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setHomeAsUpIndicator(R.drawable.actionbar_upbutton);
+		actionBar.setHomeAsUpIndicator(R.drawable.ic_action_list);
+
 	}
 
 	@Override
