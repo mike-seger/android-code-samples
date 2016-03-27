@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         vpAutoScrollViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                // Reset the auto scroller when the ViewPager is manually scrolled
+                if (autoScrollHandler != null) {
+                    autoScrollHandler.removeCallbacksAndMessages(null);
+                    initAutoScroll();
+                }
             }
 
             @Override
