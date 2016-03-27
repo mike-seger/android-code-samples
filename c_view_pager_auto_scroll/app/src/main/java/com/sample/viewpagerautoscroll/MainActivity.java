@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-public class ViewPagerActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private ViewPager vpAutoScrollViewPager;
     private int mCurrentPosition = 1;
@@ -68,7 +68,7 @@ public class ViewPagerActivity extends AppCompatActivity {
             }, 3000);
 
         } catch (Exception e) {
-            Log.d("ViewPagerActivity", e.getMessage());
+            Log.d("MainActivity", e.getMessage());
         }
     }
 

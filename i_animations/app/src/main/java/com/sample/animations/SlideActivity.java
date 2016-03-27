@@ -19,6 +19,7 @@ public class SlideActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.activity_slide);
 
         btnSlide = (Button) findViewById(R.id.btn_slide_from_right_to_left);
@@ -40,8 +41,8 @@ public class SlideActivity extends AppCompatActivity {
     }
 
     public void slideTopToBottom(View v) {
-        viewFlipper.setInAnimation(this, R.anim.in_from_top);
-        viewFlipper.setOutAnimation(this, R.anim.out_to_bottom);
+        viewFlipper.setInAnimation(AnimationFactory.inFromTopAnimation(1000));
+        viewFlipper.setOutAnimation(AnimationFactory.outToBottomAnimation(1000));
         viewFlipper.showNext();
     }
 

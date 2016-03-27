@@ -30,5 +30,4 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return (mLuckyNumbers == null) ? 0: mLuckyNumbers.length;
     }
-
 }
