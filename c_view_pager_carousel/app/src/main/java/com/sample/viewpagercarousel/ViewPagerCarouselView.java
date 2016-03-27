@@ -100,10 +100,6 @@ public class ViewPagerCarouselView extends RelativeLayout {
         vpCarousel.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (carouselHandler != null) {
-                    carouselHandler.removeCallbacksAndMessages(null); // reset the slider when the ViewPager is scrolled manually to prevent the quick slide after it is scrolled.
-                    initCarouselSlide();
-                }
             }
 
             @Override
@@ -119,6 +115,23 @@ public class ViewPagerCarouselView extends RelativeLayout {
 
                 // For going from the last item to the first item, Set the current item to the second item if the current position is on the last
                 if (mCurrentPosition == lastPageIndex)      vpCarousel.setCurrentItem(1, false);
+            }
+        });
+
+        // reset the slider when the ViewPager is scrolled manually to prevent the quick slide after it is scrolled.
+        vpCarousel.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Log.d("resetAutoScroll", "  MotionEvent.ACTION_UP ");
+                    initCarouselSlide();
+                } else {
+                    Log.d("resetAutoScroll", "  MotionEvent>" + event.getAction());
+                    if (carouselHandler != null) {
+                        carouselHandler.removeCallbacksAndMessages(null);
+                    }
+                }
+                return false;
             }
         });
 
@@ -161,7 +174,4 @@ public class ViewPagerCarouselView extends RelativeLayout {
     public void onDestroy() {
         if (carouselHandler != null) carouselHandler.removeCallbacksAndMessages(null); // remove call backs to prevent memory leaks
     }
-
-
-
 }
