@@ -129,6 +129,7 @@ public class ViewPagerCarouselView extends RelativeLayout {
                     Log.d("resetAutoScroll", "  MotionEvent>" + event.getAction());
                     if (carouselHandler != null) {
                         carouselHandler.removeCallbacksAndMessages(null);
+                        carouselHandler = null;
                     }
                 }
                 return false;
