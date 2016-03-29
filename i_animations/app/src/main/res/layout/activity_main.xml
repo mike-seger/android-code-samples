@@ -10,28 +10,28 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:text="Slide Activity"
+        android:text="Slide Activity (R to L) "
         android:onClick="startSlideActivity"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:text="Rotation Activity"
+        android:text="Rotation Activity (L to R)"
         android:onClick="startRotationActivity"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:text="Scale Activity"
+        android:text="Scale Activity (T to B)"
         android:onClick="startScaleActivity"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:text="Scale Rotation Activity"
+        android:text="Scale Rotation Activity (B to T)"
         android:onClick="startScaleRotationActivity"/>
 
 </LinearLayout>
