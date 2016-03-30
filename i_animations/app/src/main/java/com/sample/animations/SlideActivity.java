@@ -19,8 +19,9 @@ public class SlideActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
         setContentView(R.layout.activity_slide);
+
+        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left); // right to left
 
         btnSlide = (Button) findViewById(R.id.btn_slide_from_right_to_left);
         viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);

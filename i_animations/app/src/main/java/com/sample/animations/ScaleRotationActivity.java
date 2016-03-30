@@ -22,6 +22,7 @@ public class ScaleRotationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scale_rotation);
+        overridePendingTransition(R.anim.in_from_bottom, R.anim.out_to_top); // bottom to top
         ivWheel = (ImageView) findViewById(R.id.iv_wheel);
     }
 

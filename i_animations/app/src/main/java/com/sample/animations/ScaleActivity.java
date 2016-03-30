@@ -20,6 +20,7 @@ public class ScaleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scale);
+        overridePendingTransition(R.anim.in_from_top, R.anim.out_to_bottom); // top to bottom
         ivWheel = (ImageView) findViewById(R.id.iv_wheel);
     }
 

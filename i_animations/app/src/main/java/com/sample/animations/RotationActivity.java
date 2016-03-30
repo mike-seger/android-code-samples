@@ -19,6 +19,7 @@ public class RotationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rotate);
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right); // left to right
 
         ivWheel = (ImageView) findViewById(R.id.iv_wheel);
     }
