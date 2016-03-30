@@ -32,4 +32,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, ScaleRotationActivity.class);
         startActivity(i);
     }
+
+    public void startInterpolatorActivity(View v) {
+        Intent i = new Intent(this, InterpolatorActivity.class);
+        startActivity(i);
+    }
 }
