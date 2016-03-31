@@ -3,7 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="Teacher"/>
     <TextView 
         android:id="@+id/tv_sname"
         android:layout_width="wrap_content"
@@ -20,11 +25,19 @@
         android:id="@+id/tv_sage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
         android:textIsSelectable="true" />
 
     <TextView
-        android:id="@+id/tv_major"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="Students"/>
+
+    <TextView
+        android:id="@+id/tv_students"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textIsSelectable="true" />
 </LinearLayout>
