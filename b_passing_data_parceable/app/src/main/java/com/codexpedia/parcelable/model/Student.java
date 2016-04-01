@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Nested Parcelable Example
  * The nested parcelable object: Major
  *
- * The differences are:
+ * The differences from simple parcelable class:
  * The parcelable object has to be the first one in the read and write
  *
  * write: dest.writeParcelable(this.mMajor, flags);
@@ -59,13 +59,15 @@ public class Student implements Parcelable {
 	};
 
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	//The following are just setter and getter methods
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	public String getEmail() {
 		return mEmail;
 	}
 	public void setEmail(String mSEmail) {
 		this.mEmail = mSEmail;
 	}
-
 	public String getName() {
 		return mName;
 	}

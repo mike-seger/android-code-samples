@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * List of Parcelables in a Parcelable Example
  * The list of parcelables: ArrayList<Student>
  *
- * The differences are:
+ * The differences from simple parcelable class:
  * write: dest.writeTypedList(this.mStudents);
  * read: in.readTypedList(this.mStudents, Student.CREATOR);
  */
@@ -59,6 +59,9 @@ public class Teacher implements Parcelable {
 	};
 
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	//The following are just setter and getter methods
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	public int getAge() {
 		return mAge;
 	}

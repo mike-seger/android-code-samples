@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Major implements Parcelable {
-
     private String mSubject;
     private int mGradeMinimum;
 
@@ -39,20 +38,19 @@ public class Major implements Parcelable {
     };
 
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //The following are just setter and getter methods
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     public String getmSubject() {
         return mSubject;
     }
-
     public void setmSubject(String mSubject) {
         this.mSubject = mSubject;
     }
-
     public int getmGradeMinimum() {
         return mGradeMinimum;
     }
-
     public void setmGradeMinimum(int mGradeMinimum) {
         this.mGradeMinimum = mGradeMinimum;
     }
-
 }
