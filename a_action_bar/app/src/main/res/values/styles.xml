@@ -13,9 +13,14 @@
     </style>
 
     <style name="AppTheme" parent="android:Theme.Holo.Light">
-        <item name="android:actionBarSize">40dp</item>
+        <item name="android:actionBarStyle">@style/AppThemeActionBar</item>
         <item name="android:logo">@android:color/transparent</item>
     </style>
 
+    <style name="AppThemeActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:actionBarSize">40dp</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
+    </style>
 
 </resources>
