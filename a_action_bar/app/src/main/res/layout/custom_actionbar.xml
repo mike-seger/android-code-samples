@@ -5,12 +5,11 @@
 
     <Button
         android:id="@+id/btn_home"
-        android:layout_width="60dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:background="#09c7be"
-        android:text="Home"/>
+        android:background="@drawable/actionbar_icon_hamburger" />
 
     <TextView
         android:id="@+id/title_text"
