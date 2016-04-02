@@ -1,7 +1,8 @@
-package com.codexpedia;
+package com.codexpedia.actionbar;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -43,6 +44,8 @@ public class MainActivity extends Activity {
 		switch (item.getItemId()) {
 			case android.R.id.home:
 				setActionText("actionbar home button clicked!");
+				Intent i = new Intent(this, CustomActionBarActivity.class);
+				startActivity(i);
 				break;
 			case R.id.btn_edit:
 				setActionText("edit button clicked!");
