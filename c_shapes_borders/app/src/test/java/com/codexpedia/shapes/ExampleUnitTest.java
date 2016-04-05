@@ -1,4 +1,4 @@
-package com.codexpedia.shapes;
+package com.codexpedia.shapes_borders;
 
 import org.junit.Test;
 

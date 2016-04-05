@@ -1,4 +1,4 @@
-package com.codexpedia.shapes;
+package com.codexpedia.shapes_borders;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

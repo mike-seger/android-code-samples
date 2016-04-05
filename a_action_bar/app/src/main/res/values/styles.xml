@@ -12,15 +12,24 @@
         -->
     </style>
 
-    <style name="AppTheme" parent="android:Theme.Holo.Light">
-        <item name="android:actionBarStyle">@style/AppThemeActionBar</item>
-        <item name="android:logo">@android:color/transparent</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="actionBarStyle">@style/AppThemeActionBar</item>
+        <item name="logo">@android:color/transparent</item>
     </style>
 
-    <style name="AppThemeActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:actionBarSize">40dp</item>
+    <style name="AppThemeActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@color/blue</item>
+        <item name="actionBarSize">40dp</item>
+        <item name="height">40dp</item>
+
+        <item name="contentInsetLeft">0dp</item>
         <item name="contentInsetStart">0dp</item>
         <item name="contentInsetEnd">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
+
+
 
 </resources>
