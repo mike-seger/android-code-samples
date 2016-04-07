@@ -18,6 +18,4 @@
         android:textStyle="normal"
         android:textColor="#ffffff"
         android:fontFamily="sans-serif" />
-    
-
 </RelativeLayout>
