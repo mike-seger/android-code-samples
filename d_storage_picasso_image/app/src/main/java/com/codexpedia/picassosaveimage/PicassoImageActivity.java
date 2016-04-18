@@ -23,7 +23,7 @@ import java.io.IOException;
  */
 public class PicassoImageActivity extends AppCompatActivity {
     private String imageUrl = "https://cloud.githubusercontent.com/assets/5489943/14237225/ef4e3666-f9ee-11e5-886e-9e15b1f1b09d.png";
-    private String imagePath = "/data/data/com.codexpedia.picassosaveimage/app_imageDir/my_image.png";
+//    private String imagePath = "/data/data/com.codexpedia.picassosaveimage/app_imageDir/my_image.png";
 
     private String imageDir = "imageDir";
     private String imageName = "my_image.png";
@@ -44,45 +44,54 @@ public class PicassoImageActivity extends AppCompatActivity {
         tvLog.setText(logStr);
     }
 
-
     /**********************************************************************************************************
      * Button onClick methods
      **********************************************************************************************************/
     public void loadImageFromUrl(View v) {
-        log("loadImageFromUrl Load image from url");
+        log("Load image from url");
         Picasso.with(this).load(imageUrl).into(ivImage);
     }
     public void downloadSaveImageFromUrl(View v) {
-        log("downloadSaveImageFromUrl Load image from url and save it to disk through Picasso");
+        log("Load image from url and save it to disk through Picasso");
         Picasso.with(this).load(imageUrl).into(picassoImageTarget(getApplicationContext(), imageDir, imageName));
     }
 
     public void loadImageFromDisk(View v) {
-        if (new File(imagePath).exists()) {
-            log("loadImageFromDisk Load image from disk: ");
-            Picasso.with(this).load(new File(imagePath)).into(ivImage);
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir(imageDir, Context.MODE_PRIVATE);
+        File myImageFile = new File(directory, imageName);
+
+        if (myImageFile.exists()) {
+            log("Load image from disk: " + myImageFile.getAbsolutePath());
+            Picasso.with(this).load(myImageFile).into(ivImage);
 
         } else {
             ivImage.setImageBitmap(null); // remove the existing image first
-            log("loadImageFromDisk the image doesn't exist on disk!");
+            log("The image doesn't exist on disk!");
         }
     }
 
     public void deleteImageFromDisk(View v) {
-        if (new File(imagePath).exists()) {
-            File file = new File(imagePath);
-            if (file.delete()) log("deleteImageFromDisk image on the disk deleted successfully!");
-            else log("deleteImageFromDisk failed to delete " + imagePath);
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir(imageDir, Context.MODE_PRIVATE);
+        File myImageFile = new File(directory, imageName);
+
+        if (myImageFile.exists()) {
+            if (myImageFile.delete()) log("The image on the disk deleted successfully!");
+            else log("Failed to delete " + myImageFile.getAbsolutePath());
         } else {
-            log("loadImageFromDisk no such image on disk! No need to delete it!");
+            log("No such image on disk! No need to delete it!");
         }
     }
-    public void checkIfImageExist(View v) {
-        File file = new File(imagePath);
-        if (file.exists())log("checkIfImageDisk the image is there!");
-        else log("checkIfImageDisk the image is not there!");
-    }
 
+    public void checkIfImageExist(View v) {
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir(imageDir, Context.MODE_PRIVATE);
+        File myImageFile = new File(directory, imageName);
+
+        if (myImageFile.exists())log("the image is there!");
+        else log("The image is not there!");
+    }
 
     /**********************************************************************************************************
      * Target class for saving image bitmap returned from Picasso
