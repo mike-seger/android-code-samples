@@ -14,7 +14,7 @@ import android.widget.Button;
 
 // http://developer.android.com/training/app-indexing/deep-linking.html
 // adb shell pm list packages -f | grep com.example.deeplink
-// adb shell am start  -n "com.codexpedia.deeplinking/com.codexpedia.deeplinking.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER
+// adb shell am start  -n "com.example.deeplinking/com.example.deeplinking.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER
 //  $ adb shell am start -W -a android.intent.action.VIEW -d "example://mainactivity" com.example.deeplinking
 public class MainActivity extends AppCompatActivity {
 
