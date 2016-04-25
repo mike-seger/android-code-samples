@@ -1,5 +1,6 @@
 package com.example.imagewarmup;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,11 +10,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 
+import com.koushikdutta.async.future.Future;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int ION        = 111;
+    private static final int PICASSO    = 222;
+    private int imageLib = ION;
 
     private LinearLayout llImageContainer;
     private String [] imgUrls= {
@@ -43,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             "http://www.50img.com/wp-content/uploads/2016/03/HappyEaster2015-60x57.jpg"
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +58,73 @@ public class MainActivity extends AppCompatActivity {
 
         llImageContainer = (LinearLayout) findViewById(R.id.ll_image_container);
 
-        preloadImages();
+        imageLib = ION;
+        preLoadImages();
     }
 
-    private void preloadImages() {
+    private void preLoadImages() {
+        switch (imageLib) {
+            case ION:
+                preloadImagesWithIon();
+                break;
+            case PICASSO:
+                preloadImagesWithPicasso();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Triggered when the button is clicked
+     * @param v
+     */
+    public void loadImages(View v) {
+        switch (imageLib) {
+            case ION:
+                loadImagesWithIon();
+                break;
+            case PICASSO:
+                loadImagesWithPicasso();
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    /************************************************************************************************
+     * Ion image loader library
+     ************************************************************************************************/
+    private void preloadImagesWithIon() {
+        for (String url: imgUrls) {
+            Ion.with(getApplicationContext()).load(url).asBitmap().setCallback(new FutureCallback<Bitmap>() {
+                @Override
+                public void onCompleted(Exception e, Bitmap result) {
+//                    Log.d("MainActivity", "getAllocationByteCount>>>" + result.getAllocationByteCount());
+                }
+            });
+        }
+    }
+    private void loadImagesWithIon() {
+        for(final String url: imgUrls) {
+            final ImageView imageView = new ImageView(this);
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            llImageContainer.addView(imageView);
+            Ion.with(imageView).load(url);
+
+        }
+    }
+
+    /************************************************************************************************
+     * Picasso image loader library, error handling, that's why the code is longer than Ion
+     ************************************************************************************************/
+    private void preloadImagesWithPicasso() {
         for(String url: imgUrls) {
             Picasso.with(getApplicationContext()).load(url).fetch();
         }
     }
-
-    public void loadImages(View v) {
+    private void loadImagesWithPicasso() {
         for(final String url: imgUrls) {
             final ImageView imageView = new ImageView(this);
             imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -89,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
     private void loadWithLogging() {
         Picasso picasso = new Picasso.Builder(getApplicationContext())
                 .listener(new Picasso.Listener() {
