@@ -16,6 +16,13 @@
             android:textAllCaps="false"
             android:text="Load Images"
             android:onClick="loadImages"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:text="Clear Cache"
+            android:onClick="clearCache"/>
     </LinearLayout>
 </ScrollView>
 

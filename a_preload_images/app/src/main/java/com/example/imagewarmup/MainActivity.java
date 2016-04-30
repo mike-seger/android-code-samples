@@ -9,13 +9,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-
-import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     private static final int ION        = 111;
@@ -92,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void clearCache(View v) {
+        clearApplicationData();
+    }
 
     /************************************************************************************************
      * Ion image loader library
@@ -166,4 +169,36 @@ public class MainActivity extends AppCompatActivity {
         picasso.load("http://developer.android.com/images/activity_lifecycle.png").into(new ImageView(this));
     }
 
+
+
+
+
+    private void clearApplicationData() {
+        try {
+            File cache = getCacheDir();
+            File appDir = new File(cache.getParent());
+            if (appDir.exists()) {
+                String[] children = appDir.list();
+                for (String s : children) {
+                    if (!s.equals("lib")) {
+                        deleteDir(new File(appDir, s));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        return dir.delete();
+    }
 }
