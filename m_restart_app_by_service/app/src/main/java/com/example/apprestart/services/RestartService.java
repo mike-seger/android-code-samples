@@ -35,9 +35,10 @@ public class RestartService extends IntentService {
         }
 
         launchApp(this, "com.example.apprestart");
-        this.stopSelf();
+        stopSelf();
         android.os.Process.killProcess(android.os.Process.myPid());
     }
+
     public void launchApp(Context context, String packageName) {
         PackageManager manager = context.getPackageManager();
         Intent i = manager.getLaunchIntentForPackage(packageName);
