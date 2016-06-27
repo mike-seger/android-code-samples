@@ -18,6 +18,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Rx1DeferActivity"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".Rx2ObervableFromCallableActivity"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".Rx3SingleFromCallableActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".Rx4PublishSubjectActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".Rx5SingleJustMapActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".Rx6DebounceMapActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".Rx7ZipActivity"
+            android:parentActivityName=".MainActivity"/>
+
     </application>
 
 </manifest>

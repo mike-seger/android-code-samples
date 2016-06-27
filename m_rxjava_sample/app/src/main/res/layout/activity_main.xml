@@ -9,10 +9,69 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <Button
-        android:id="@+id/button_run_scheduler"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Run Schedulers Example"/>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/button_rx1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="rxjava Obervable.defer"
+                android:onClick="rx1Ex"/>
+
+            <Button
+                android:id="@+id/button_rx2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="rxjava Obervable.fromCallable"
+                android:onClick="rx2Ex"/>
+
+            <Button
+                android:id="@+id/button_rx3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="rxjava Single.fromCallable"
+                android:onClick="rx3Ex"/>
+
+            <Button
+                android:id="@+id/button_rx4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="rxjava PublishSubject.create"
+                android:onClick="rx4Ex"/>
+
+            <Button
+                android:id="@+id/button_rx5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="rxjava Single.just().map"
+                android:onClick="rx5Ex"/>
+
+            <Button
+                android:id="@+id/button_rx6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="rxjava debounce.map"
+                android:onClick="rx6Ex"/>
+
+            <Button
+                android:id="@+id/button_rx7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="rxjava Observable.zip"
+                android:onClick="rx7Ex"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
