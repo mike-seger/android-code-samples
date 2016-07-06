@@ -58,11 +58,8 @@ public class Rx7ZipActivity extends AppCompatActivity {
     private void createObservable() {
         mTvShowSubscription =
                 Observable
-                .zip(Observable.just(getStrings12()),
-                        Observable.just(getStrings34()),
-                        Observable.just(getStrings56()),
-                        mergeStringLists())
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .zip(getStrings("One", "Two"), getStrings("Three", "Four"), getStrings("Five", "Six"), mergeStringLists())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<String>>() {
                     @Override
@@ -110,32 +107,17 @@ public class Rx7ZipActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    private List<String> getStrings12() {
-        Log.d(TAG, "One Two");
-        sleep();
-
-        List<String> strings = new ArrayList<>();
-        strings.add("One");
-        strings.add("Two");
-        return strings;
-    }
-
-    private List<String> getStrings34() {
-        Log.d(TAG, "Three Four");
-        sleep();
-        List<String> strings = new ArrayList<>();
-        strings.add("Three");
-        strings.add("Four");
-        return strings;
-    }
-
-    private List<String> getStrings56() {
-        Log.d(TAG, "Five Six");
-        sleep();
-        List<String> strings = new ArrayList<>();
-        strings.add("Five");
-        strings.add("Six");
-        return strings;
+    private Observable<List<String>> getStrings(final String str1, final String str2) {
+        return Observable.fromCallable(new Callable<List<String>>() {
+            @Override
+            public List<String> call() {
+                sleep();
+                List<String> strings = new ArrayList<>();
+                strings.add(str1);
+                strings.add(str2);
+                return strings;
+            }
+        });
     }
 
     @Override

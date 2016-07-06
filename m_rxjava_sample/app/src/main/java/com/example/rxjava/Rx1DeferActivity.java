@@ -80,6 +80,7 @@ public class Rx1DeferActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     throw OnErrorThrowable.from(e);
                 }
+                Log.d(TAG, "The sleep is over, now produce something");
                 return Observable.just("one", "two", "three", "four", "five");
             }
         });

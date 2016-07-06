@@ -16,6 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_demo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="rxjava demo"
+                android:onClick="demo"/>
+
             <Button
                 android:id="@+id/button_rx1"
                 android:layout_width="match_parent"
