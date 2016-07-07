@@ -58,8 +58,10 @@ public class Rx7ZipActivity extends AppCompatActivity {
     private void createObservable() {
         mTvShowSubscription =
                 Observable
-                .zip(getStrings("One", "Two"), getStrings("Three", "Four"), getStrings("Five", "Six"), mergeStringLists())
-                .subscribeOn(Schedulers.io())
+                .zip(getStrings("One", "Two").subscribeOn(Schedulers.newThread()),
+                        getStrings("Three", "Four").subscribeOn(Schedulers.newThread()),
+                        getStrings("Five", "Six").subscribeOn(Schedulers.newThread()),
+                        mergeStringLists())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<String>>() {
                     @Override
@@ -108,6 +110,7 @@ public class Rx7ZipActivity extends AppCompatActivity {
         }
     }
     private Observable<List<String>> getStrings(final String str1, final String str2) {
+        Log.d(TAG, str1 + " " + str2);
         return Observable.fromCallable(new Callable<List<String>>() {
             @Override
             public List<String> call() {
