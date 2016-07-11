@@ -5,6 +5,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SwitchCompat;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,7 +29,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
 
         Menu menu = navigationView.getMenu();
         MenuItem menuItem = menu.findItem(R.id.nav_switch);
@@ -50,6 +50,15 @@ public class MainActivity extends AppCompatActivity
                 Snackbar.make(v, (switcher.isChecked()) ? "is checked!!!" : "not checked!!!", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
             }
         });
+
+
+        //applying style to the text on the menu
+        for (int i=0; i<menu.size(); i++) {
+            MenuItem mi = menu.getItem(i);
+            SpannableString s = new SpannableString(mi.getTitle());
+            s.setSpan(new TextAppearanceSpan(this, R.style.navigation_menu_item), 0, s.length(), 0);
+            mi.setTitle(s);
+        }
 
     }
 
