@@ -73,12 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             alertDialog.show();
         } else if (id == R.id.nav_fragment_dialog) {
             fragmentDialog.show(getSupportFragmentManager(), "tag");
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -91,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         customDialog.setImage(R.drawable.ic_menu_camera);
         int nFont = (int) getResources().getDimension(R.dimen.font_size_16sp);
         customDialog.show();
+        
         Button btn = (Button) customDialog.findViewById(R.id.btn_no);
         Button btn1 = (Button) customDialog.findViewById(R.id.btn_yes);
         btn.setTextSize(TypedValue.COMPLEX_UNIT_PX, nFont);
