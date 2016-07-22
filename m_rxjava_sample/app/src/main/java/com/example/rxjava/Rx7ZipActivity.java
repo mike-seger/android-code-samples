@@ -55,6 +55,7 @@ public class Rx7ZipActivity extends AppCompatActivity {
         createObservable();
     }
 
+
     private void createObservable() {
         mTvShowSubscription =
                 Observable
@@ -109,12 +110,20 @@ public class Rx7ZipActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    private void longRunning() {
+
+        for (int i=0; i<1000000000; i++) {
+
+        }
+    }
+
     private Observable<List<String>> getStrings(final String str1, final String str2) {
-        Log.d(TAG, str1 + " " + str2);
         return Observable.fromCallable(new Callable<List<String>>() {
             @Override
             public List<String> call() {
-                sleep();
+                longRunning();
+                Log.d(TAG, Thread.currentThread().getName() + " " + str1 + " " + str2);
                 List<String> strings = new ArrayList<>();
                 strings.add(str1);
                 strings.add(str2);
@@ -122,6 +131,7 @@ public class Rx7ZipActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onDestroy() {
