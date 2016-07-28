@@ -148,7 +148,7 @@ public class DownloadFragment extends Fragment {
 
             Log.d("DownloadFragment ", "f.getParentFile().getPath()=" + f.getParentFile().getPath());
             Log.d("DownloadFragment ", "f.getName()=" + f.getName().replace(".zip", ""));
-//            unpackZip(f.getParentFile().getPath(), f.getName().replace(".zip", ""));
+            //unpackZip(f.getParentFile().getPath(), f.getName().replace(".zip", ""));
             unpackZip(destinationFilePath);
             return "Download Completed!";
         }
