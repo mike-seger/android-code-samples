@@ -87,10 +87,9 @@ public class MainActivity extends AppCompatActivity
 
     public void downloadByDownloadManager(String url, String outputFileName) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        //request.setDescription("A zip package with some files");
-        //request.setTitle("Zip package");
-        //request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-
+        request.setDescription("A zip package with some files");
+        request.setTitle("Zip package");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         request.allowScanningByMediaScanner();
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, outputFileName);
 

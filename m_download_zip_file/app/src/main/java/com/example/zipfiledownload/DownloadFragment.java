@@ -54,13 +54,16 @@ public class DownloadFragment extends Fragment {
         mCallbacks = null;
     }
 
-
-    private boolean unpackZip(String path, String zipname) {
+    private boolean unpackZip(String filePath) {
         InputStream is;
         ZipInputStream zis;
         try {
+
+            File zipfile = new File(filePath);
+            String parentFolder = zipfile.getParentFile().getPath();
             String filename;
-            is = new FileInputStream(path + "/" + zipname + ".zip");
+
+            is = new FileInputStream(filePath);
             zis = new ZipInputStream(new BufferedInputStream(is));
             ZipEntry ze;
             byte[] buffer = new byte[1024];
@@ -70,12 +73,12 @@ public class DownloadFragment extends Fragment {
                 filename = ze.getName();
 
                 if (ze.isDirectory()) {
-                    File fmd = new File(path + "/" + filename);
+                    File fmd = new File(parentFolder + "/" + filename);
                     fmd.mkdirs();
                     continue;
                 }
 
-                FileOutputStream fout = new FileOutputStream(path + "/" + filename);
+                FileOutputStream fout = new FileOutputStream(parentFolder + "/" + filename);
 
                 while ((count = zis.read(buffer)) != -1) {
                     fout.write(buffer, 0, count);
@@ -93,7 +96,6 @@ public class DownloadFragment extends Fragment {
 
         return true;
     }
-
 
     private class DownloadTask extends AsyncTask<String, Integer, String> {
 
@@ -146,7 +148,8 @@ public class DownloadFragment extends Fragment {
 
             Log.d("DownloadFragment ", "f.getParentFile().getPath()=" + f.getParentFile().getPath());
             Log.d("DownloadFragment ", "f.getName()=" + f.getName().replace(".zip", ""));
-            unpackZip(f.getParentFile().getPath(), f.getName().replace(".zip", ""));
+//            unpackZip(f.getParentFile().getPath(), f.getName().replace(".zip", ""));
+            unpackZip(destinationFilePath);
             return "Download Completed!";
         }
 
