@@ -2,6 +2,7 @@ package com.example.retrofitdownloadzip;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -22,10 +23,19 @@ import java.io.OutputStream;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okio.BufferedSink;
+import okio.Okio;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -76,8 +86,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.download_zip) {
             downloadZipFile();
-        } else if (id == R.id.nav_gallery) {
-
+        } else if (id == R.id.download_zip_rxjava) {
+            downloadZipFileRx();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -85,12 +95,75 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
+    private void downloadZipFileRx() {
+        // https://github.com/GameJs/gamejs/archive/master.zip
+        // AtomicGameEngine/AtomicGameEngine/archive/master.zip
+        RetrofitInterface downloadService = createService(RetrofitInterface.class, "https://github.com/");
+
+        downloadService.downloadFileByUrlRx("AtomicGameEngine/AtomicGameEngine/archive/master.zip")
+                .flatMap(new Func1<Response<ResponseBody>, Observable<File>>() {
+                    @Override
+                    public Observable<File> call(Response<ResponseBody> responseBodyResponse) {
+                        return saveToDiskRx(responseBodyResponse);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<File>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d(TAG, "onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        Log.d(TAG, "Error " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(File file) {
+                        Log.d(TAG, "File downloaded to " + file.getAbsolutePath());
+                    }
+                });
+
+    }
+
+
+
+    public Observable<File> saveToDiskRx(final Response<ResponseBody> response) {
+        return Observable.create(new Observable.OnSubscribe<File>() {
+            @Override
+            public void call(Subscriber<? super File> subscriber) {
+                try {
+                    String header = response.headers().get("Content-Disposition");
+                    String filename = header.replace("attachment; filename=", "");
+
+                    new File("/data/data/" + getPackageName() + "/games").mkdir();
+                    File destinationFile = new File("/data/data/" + getPackageName() + "/games/" + filename);
+
+                    BufferedSink bufferedSink = Okio.buffer(Okio.sink(destinationFile));
+                    bufferedSink.writeAll(response.body().source());
+                    bufferedSink.close();
+
+                    subscriber.onNext(destinationFile);
+                    subscriber.onCompleted();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    subscriber.onError(e);
+                }
+            }
+        });
+
+
+    }
+
+
     private void downloadZipFile() {
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://github.com/");
-        Retrofit retrofit = builder.client(httpClient.build()).build();
-        RetrofitInterface downloadService = retrofit.create(RetrofitInterface.class);
+        RetrofitInterface downloadService = createService(RetrofitInterface.class, "https://github.com/");
         Call<ResponseBody> call = downloadService.downloadFileByUrl("gameplay3d/GamePlay/archive/master.zip");
+
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, final Response<ResponseBody> response) {
@@ -100,7 +173,7 @@ public class MainActivity extends AppCompatActivity
                     new AsyncTask<Void, Long, Void>() {
                         @Override
                         protected Void doInBackground(Void... voids) {
-                            saveToDisk(response.body());
+                            saveToDisk(response.body(), "gameplay3d.zip");
                             return null;
                         }
                     }.execute();
@@ -119,17 +192,17 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void saveToDisk(ResponseBody body) {
+    private void saveToDisk(ResponseBody body, String filename) {
         try {
             new File("/data/data/" + getPackageName() + "/games").mkdir();
-            File destinationFile = new File("/data/data/" + getPackageName() + "/games/gameplay3d.zip");
+            File destinationFile = new File("/data/data/" + getPackageName() + "/games/" + filename);
 
             InputStream is = null;
             OutputStream os = null;
 
             try {
-                Log.d(TAG, "File Size=" + body.contentLength());
-
+                long filesize = body.contentLength();
+                Log.d(TAG, "File Size=" + filesize);
                 is = body.byteStream();
                 os = new FileOutputStream(destinationFile);
 
@@ -139,7 +212,7 @@ public class MainActivity extends AppCompatActivity
                 while ((count = is.read(data)) != -1) {
                     os.write(data, 0, count);
                     progress +=count;
-                    Log.d(TAG, "Progress: " + progress + "/" + body.contentLength() + " >>>> " + (float) progress/body.contentLength());
+                    Log.d(TAG, "Progress: " + progress + "/" + filesize + " >>>> " + (float) progress/filesize);
                 }
 
                 os.flush();
@@ -161,6 +234,15 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+
+    public <S> S createService(Class<S> serviceClass, String baseUrl) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .client(new OkHttpClient.Builder().build())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
+        return retrofit.create(serviceClass);
+    }
 
 }
 

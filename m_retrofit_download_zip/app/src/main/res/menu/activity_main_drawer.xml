@@ -7,8 +7,8 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Download Zip File" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/download_zip_rxjava"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Download Zip File RxJava" />
     </group>
 </menu>
