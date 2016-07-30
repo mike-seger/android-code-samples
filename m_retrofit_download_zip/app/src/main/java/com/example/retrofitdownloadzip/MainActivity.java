@@ -100,39 +100,24 @@ public class MainActivity extends AppCompatActivity
         // https://github.com/GameJs/gamejs/archive/master.zip
         // AtomicGameEngine/AtomicGameEngine/archive/master.zip
         RetrofitInterface downloadService = createService(RetrofitInterface.class, "https://github.com/");
-
         downloadService.downloadFileByUrlRx("AtomicGameEngine/AtomicGameEngine/archive/master.zip")
-                .flatMap(new Func1<Response<ResponseBody>, Observable<File>>() {
-                    @Override
-                    public Observable<File> call(Response<ResponseBody> responseBodyResponse) {
-                        return saveToDiskRx(responseBodyResponse);
-                    }
-                })
+                .flatMap(processResponse())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<File>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "onCompleted");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        Log.d(TAG, "Error " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(File file) {
-                        Log.d(TAG, "File downloaded to " + file.getAbsolutePath());
-                    }
-                });
+                .subscribe(handleResult());
 
     }
 
+    private Func1<Response<ResponseBody>, Observable<File>> processResponse() {
+        return new Func1<Response<ResponseBody>, Observable<File>>() {
+            @Override
+            public Observable<File> call(Response<ResponseBody> responseBodyResponse) {
+                return saveToDiskRx(responseBodyResponse);
+            }
+        };
+    }
 
-
-    public Observable<File> saveToDiskRx(final Response<ResponseBody> response) {
+    private Observable<File> saveToDiskRx(final Response<ResponseBody> response) {
         return Observable.create(new Observable.OnSubscribe<File>() {
             @Override
             public void call(Subscriber<? super File> subscriber) {
@@ -155,9 +140,32 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-
-
     }
+
+    private Observer<File> handleResult() {
+        return new Observer<File>() {
+            @Override
+            public void onCompleted() {
+                Log.d(TAG, "onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                Log.d(TAG, "Error " + e.getMessage());
+            }
+
+            @Override
+            public void onNext(File file) {
+                Log.d(TAG, "File downloaded to " + file.getAbsolutePath());
+            }
+        };
+    }
+
+
+
+
+
 
 
     private void downloadZipFile() {
@@ -236,7 +244,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    public <S> S createService(Class<S> serviceClass, String baseUrl) {
+    public <T> T createService(Class<T> serviceClass, String baseUrl) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(new OkHttpClient.Builder().build())
