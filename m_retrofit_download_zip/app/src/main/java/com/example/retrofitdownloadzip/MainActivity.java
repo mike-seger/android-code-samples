@@ -15,11 +15,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -102,6 +106,7 @@ public class MainActivity extends AppCompatActivity
         RetrofitInterface downloadService = createService(RetrofitInterface.class, "https://github.com/");
         downloadService.downloadFileByUrlRx("AtomicGameEngine/AtomicGameEngine/archive/master.zip")
                 .flatMap(processResponse())
+                .flatMap(unpackZip())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResult());
@@ -142,6 +147,56 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    private Func1<File, Observable<File>> unpackZip() {
+        return new Func1<File, Observable<File>>() {
+            @Override
+            public Observable<File> call(File file) {
+                InputStream is;
+                ZipInputStream zis;
+                String parentFolder;
+                String filename;
+                try {
+                    parentFolder = file.getParentFile().getPath();
+
+                    is = new FileInputStream(file.getAbsolutePath());
+                    zis = new ZipInputStream(new BufferedInputStream(is));
+                    ZipEntry ze;
+                    byte[] buffer = new byte[1024];
+                    int count;
+
+                    while ((ze = zis.getNextEntry()) != null) {
+                        filename = ze.getName();
+
+                        if (ze.isDirectory()) {
+                            File fmd = new File(parentFolder + "/" + filename);
+                            fmd.mkdirs();
+                            continue;
+                        }
+
+                        FileOutputStream fout = new FileOutputStream(parentFolder + "/" + filename);
+
+                        while ((count = zis.read(buffer)) != -1) {
+                            fout.write(buffer, 0, count);
+                        }
+
+                        fout.close();
+                        zis.closeEntry();
+                    }
+
+                    zis.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                File extractedFile = new File(file.getAbsolutePath().replace(".zip",""));
+                if (!file.delete()) Log.d("unpackZip", "Failed to deleted the zip file.");
+                return Observable.just(extractedFile);
+            }
+        };
+    }
+
     private Observer<File> handleResult() {
         return new Observer<File>() {
             @Override
@@ -157,7 +212,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onNext(File file) {
-                Log.d(TAG, "File downloaded to " + file.getAbsolutePath());
+                Log.d(TAG, "File downloaded and extracted to " + file.getAbsolutePath());
             }
         };
     }

@@ -62,7 +62,9 @@ public class MainActivity extends Activity {
         startActivity(new Intent(this, Rx7ZipActivity.class));
     }
 
-
+    public void rx8Ex(View v) {
+        startActivity(new Intent(this, Rx8FlapmapActivity.class));
+    }
 
 
 

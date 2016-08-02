@@ -80,6 +80,14 @@
                 android:textAllCaps="false"
                 android:text="rxjava Observable.zip"
                 android:onClick="rx7Ex"/>
+
+            <Button
+                android:id="@+id/button_rx8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="rxjava multi flapmaps"
+                android:onClick="rx8Ex"/>
         </LinearLayout>
     </ScrollView>
 
