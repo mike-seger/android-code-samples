@@ -75,7 +75,7 @@ public class Rx8FlapmapActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(Integer integer) {
-                        mValueDisplay.setText(mValueDisplay.getText() + integer.toString() + "\n");
+                        mValueDisplay.setText(integer.toString() + "\n");
                     }
                 });
     }
