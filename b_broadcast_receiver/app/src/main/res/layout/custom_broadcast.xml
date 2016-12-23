@@ -2,16 +2,14 @@
    android:layout_width="fill_parent"
    android:layout_height="fill_parent"
    android:orientation="vertical" >
-
    <Button android:id="@+id/btnStartService"
-   android:layout_width="fill_parent"
-   android:layout_height="wrap_content"
-   android:text="@string/broadcast_intent"
-   android:onClick="broadcastIntent"/>
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/broadcast_intent"
+      android:onClick="broadcastIntent"/>
    <Button android:id="@+id/btnStartService2"
        android:layout_width="fill_parent"
        android:layout_height="wrap_content"
        android:text="@string/broadcast_intent2"
        android:onClick="broadcastIntent2"/>
-
 </LinearLayout>
