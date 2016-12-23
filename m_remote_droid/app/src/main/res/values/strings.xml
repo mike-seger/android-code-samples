@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RemoteDroid</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="remote_connect">Remote Connection</string>
+
+</resources>
